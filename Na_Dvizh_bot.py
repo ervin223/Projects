@@ -1,4 +1,4 @@
-﻿import telebot
+import telebot
 from telebot import types
 
 token = '6401653716:AAEhwr3_dPCu02na3l62IokaMnKI8JR7acw'
@@ -34,8 +34,18 @@ def handle_all_messages(message):
         channel_button = types.InlineKeyboardButton("Перейти в канал", url="https://t.me/na_dv1zh")
         inline_markup.add(channel_button)
         bot.send_message(message.chat.id, "Переход в обычный канал:", reply_markup=inline_markup)
+    elif message.text == "Какие трэки хотите услышать?":
+        bot.send_message(message.chat.id, "Введите треки, которые вы хотели бы услышать, через запятую:")
+        bot.register_next_step_handler(message, process_tracks_input)
     else:
         bot.send_message(message.chat.id, "Вы написали: " + message.text)
+
+def process_tracks_input(message):
+    tracks = message.text
+    with open('C:\\Users\\admin\\Desktop\\Programm\\Na Dvizh bot\\Na Dvizh bot\\tracks.txt', 'a') as file:
+        file.write(tracks + '\n')
+
+    bot.send_message(message.chat.id, "Спасибо за ваши треки, передадим их диджеям!")
 
 if __name__ == "__main__":
     bot.polling(none_stop=True)
