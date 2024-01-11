@@ -1,0 +1,65 @@
+
+
+def Lisamine(names: list, salaries: list, amount: int):
+    """
+    Функция для добавления имен и зарплат в списки names и salaries.
+
+    :param names: Список имен.
+    :param salaries: Список зарплат.
+    :param amount: Количество людей, которых необходимо добавить.
+    :rtype:list.
+    """
+    for _ in range(amount):
+        name = input("Mis on nimi? ")
+        salary = int(input("Mis suur palk on: "))
+        names.append(name)
+        salaries.append(salary)
+
+    return names, salaries
+
+def Kustutamine(name: list):
+    """
+       
+    """
+    if target_name in names:
+        index = names.index(target_name)
+        names.pop(index)
+        salaries.pop(index)
+        print(f"{target_name} успешно удален.")
+    else:
+        print(f"{target_name} не найден в списке.")
+
+    return names, salaries
+
+
+def Suurimpalk(i:list, p:list):
+    """
+    """
+    max_ = max(p)
+    ind = p.index(max_)
+    nimi = i[ind]
+    for palk in p:
+        if palk == max_:
+            ind = p.index
+    
+    return max_, nimi
+
+def Sort(i:list, p:list, a:int):
+    """
+    """
+    n = len(i)
+    if a == 1:
+        for i in range(0,N+1):
+            for m in range(n,N+1):
+                if p[n]<p[m]:
+                     kaust = p[n]
+                     p[n] = p[mp]
+                     p[m] = kaust
+                     kaust = i[n]
+                     i[n] = i[mp]
+                     i[m] = kaust
+
+    else:
+        pass
+    return i,p
+
