@@ -94,7 +94,7 @@ def FindSalaryByName(names: list, salaries: list, target_name: str):
     :param names: Список имен.
     :param salaries: Список зарплат.
     :param target_name: Имя для поиска.
-    :return: Зарплата человека с указанным именем.
+    :rtype: Зарплата человека с указанным именем.
     """
     if target_name in names:
         index = names.index(target_name)
@@ -111,7 +111,7 @@ def Top(names: list, salaries: list, n: int, reverse: bool = False):
     :param salaries: Список зарплат.
     :param n: Количество человек в топе.
     :param reverse: Если True, возвращает топ самых бедных, иначе - самых богатых.
-    :return: Список кортежей с именами и зарплатами топ N людей.
+    :rtype: Список кортежей с именами и зарплатами топ N людей.
     """
     combined_data = list(zip(names, salaries))
     sorted_data = sorted(combined_data, key=lambda x: x[1], reverse=reverse)
@@ -124,7 +124,7 @@ def Average(names: list, salaries: list):
 
     :param names: Список имен.
     :param salaries: Список зарплат.
-    :return: Кортеж из средней зарплаты и имени человека, получающего эту зарплату.
+    :rtype: Кортеж из средней зарплаты и имени человека, получающего эту зарплату.
     """
     average_salary = sum(salaries) / len(salaries)
     closest_salary = min(salaries, key=lambda x: abs(x - average_salary))
@@ -139,7 +139,7 @@ def SortByName(names: list, salaries: list, reverse: bool = False):
     :param names: Список имен.
     :param salaries: Список зарплат.
     :param reverse: Если True, сортирует в обратном порядке.
-    :return: Отсортированные списки по имени.
+    :rtype: Отсортированные списки по имени.
     """
     combined_data = list(zip(names, salaries))
     sorted_data = sorted(combined_data, key=lambda x: x[0], reverse=reverse)
@@ -153,7 +153,7 @@ def RemoveBelowThreshold(names: list, salaries: list, threshold: int):
     :param names: Список имен.
     :param salaries: Список зарплат.
     :param threshold: Пороговая зарплата для удаления.
-    :return: Отфильтрованные списки без людей с зарплатой ниже порога.
+    :rtype: Отфильтрованные списки без людей с зарплатой ниже порога.
     """
     filtered_data = [(name, salary) for name, salary in zip(names, salaries) if salary >= threshold]
     return list(zip(*filtered_data))
@@ -165,7 +165,7 @@ def EditLists(names: list, salaries: list):
 
     :param names: Список имен.
     :param salaries: Список зарплат.
-    :return: Отредактированные списки.
+    :rtype: Отредактированные списки.
     """
     edited_names = [name.capitalize() for name in names]
     edited_salaries = [int(salary) for salary in salaries]
@@ -177,7 +177,7 @@ def FutureSalary(salary: int, years: int):
 
     :param salary: Текущая зарплата.
     :param years: Количество лет.
-    :return: Будущая зарплата.
+    :rtype: Будущая зарплата.
     """
     annual_increase = 0.05  # 5% ежегодное повышение
     future_salary = salary * (1 + annual_increase) ** years
@@ -189,7 +189,7 @@ def FutureSalary(salary: int, years: int):
 
     :param salary: Текущая зарплата.
     :param years: Количество лет.
-    :return: Будущая зарплата.
+    :rtype: Будущая зарплата.
     """
     annual_increase = 0.05  # 5% ежегодное повышение
     future_salary = salary * (1 + annual_increase) ** years
@@ -200,7 +200,7 @@ def RenameEveryThird(names: list):
     Переименовывает каждого третьего человека. Новые имена вводит пользователь.
 
     :param names: Список имен.
-    :return: Обновленный список имен.
+    :rtype: Обновленный список имен.
     """
     for i in range(2, len(names), 3):
         new_name = input(f"Введите новое имя для {names[i]}: ")
@@ -213,7 +213,7 @@ def EditData(names: list, salaries: list):
 
     :param names: Список имен.
     :param salaries: Список зарплат.
-    :return: Обновленные списки.
+    :rtype: Обновленные списки.
     """
     print("1 - Редактировать имя")
     print("2 - Редактировать зарплату")
