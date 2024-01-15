@@ -159,4 +159,70 @@ def RemoveBelowThreshold(names: list, salaries: list, threshold: int):
     return list(zip(*filtered_data))
 
 
+def EditLists(names: list, salaries: list):
+    """
+    Редактирует списки, приводя имена к формату с большой буквы и зарплаты к формату int.
+
+    :param names: Список имен.
+    :param salaries: Список зарплат.
+    :return: Отредактированные списки.
+    """
+    edited_names = [name.capitalize() for name in names]
+    edited_salaries = [int(salary) for salary in salaries]
+    return edited_names, edited_salaries
+
+def FutureSalary(salary: int, years: int):
+    """
+    Рассчитывает будущую зарплату работника через T лет с учетом ежегодного повышения на 5%.
+
+    :param salary: Текущая зарплата.
+    :param years: Количество лет.
+    :return: Будущая зарплата.
+    """
+    annual_increase = 0.05  # 5% ежегодное повышение
+    future_salary = salary * (1 + annual_increase) ** years
+    return future_salary
+
+def FutureSalary(salary: int, years: int):
+    """
+    Рассчитывает будущую зарплату работника через T лет с учетом ежегодного повышения на 5%.
+
+    :param salary: Текущая зарплата.
+    :param years: Количество лет.
+    :return: Будущая зарплата.
+    """
+    annual_increase = 0.05  # 5% ежегодное повышение
+    future_salary = salary * (1 + annual_increase) ** years
+    return future_salary
+
+def RenameEveryThird(names: list):
+    """
+    Переименовывает каждого третьего человека. Новые имена вводит пользователь.
+
+    :param names: Список имен.
+    :return: Обновленный список имен.
+    """
+    for i in range(2, len(names), 3):
+        new_name = input(f"Введите новое имя для {names[i]}: ")
+        names[i] = new_name.capitalize()
+    return names
+
+def EditData(names: list, salaries: list):
+    """
+    Редактирует данные в списках. Пользователь выбирает, что редактировать: имя или зарплату.
+
+    :param names: Список имен.
+    :param salaries: Список зарплат.
+    :return: Обновленные списки.
+    """
+    print("1 - Редактировать имя")
+    print("2 - Редактировать зарплату")
+
+    choice = int(input("Выберите, что редактировать: "))
+    
+
+
+
+
+
 
