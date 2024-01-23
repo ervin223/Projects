@@ -1,5 +1,4 @@
 ﻿from function import *
-from function import EditLists, FutureSalary, Kustutamine, Lisamine, RenameEveryThird
 
 # Palgad
 salary = [1200, 2500, 750, 395, 1200]
@@ -23,7 +22,8 @@ while True:
     print("15 - Будущая зарплата")
     print("16 - Заменить имя")
     print("17 - Заменить зарплату")
-    print("18 - Выйти")
+    print("18 - Поиск по букве")
+    print("19 - Выйти")
 
     choice = int(input("Выберите действие: "))
 
@@ -123,6 +123,9 @@ while True:
         else:
             print(f"{target_name} не найдено в списке.")
     elif choice == 18:
+        letter = input("Введите букву для поиска: ")
+        Vocfind(names, salary, letter)         
+    elif choice == 19:
         break
     else:
         print("Неверный выбор. Пожалуйста, выберите снова.")

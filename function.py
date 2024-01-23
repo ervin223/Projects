@@ -19,6 +19,12 @@ def Lisamine(names: list, salaries: list, amount: int):
 
 def Kustutamine(names: list, salaries: list, target_name: str):
     """
+        Удаляет людей из списка.
+
+    :param names: Список имен.
+    :param salaries: Список зарплат.
+    :param target_name: Имя для поиска.
+    :rtype: Удаленный список.
     """
     if target_name in names:
         index = names.index(target_name)
@@ -33,6 +39,12 @@ def Kustutamine(names: list, salaries: list, target_name: str):
 
 def Suurimpalk(names: list, salaries: list):
     """
+        Ищет людей с наивысшей зарплатой.
+
+    :param names: Список имен.
+    :param salaries: Список зарплат.
+    :param target_salary: Зарплата для поиска.
+    :rtype: Список людей с наивысшей зарплатой.
     """
     max_ = max(salaries)
     ind = salaries.index(max_)
@@ -46,6 +58,13 @@ def Suurimpalk(names: list, salaries: list):
 
 def Sort(names: list, salaries: list, a: int):
     """
+    Сортирует людей по убыванию или возрастанию
+    
+        Ищет людей с заданной зарплатой.
+
+    :param names: Список имен.
+    :param salaries: Список зарплат.
+    :rtype: Сортиованыый список.
     """
     n = len(names)
     if a == 1:
@@ -64,6 +83,11 @@ def Sort(names: list, salaries: list, a: int):
 
 def Vahempalk(names: list, salaries: list):
     """
+     Находит минимальную зарплату
+
+    :param names: Список имен.
+    :param salaries: Список зарплат.
+    :rtype: Список людей с минимальной зарплатой.
     """
     min_ = min(salaries)
     ind = salaries.index(min_)
@@ -179,7 +203,7 @@ def FutureSalary(salary: int, years: int):
     :param years: Количество лет.
     :rtype: Будущая зарплата.
     """
-    annual_increase = 0.05  # 5% ежегодное повышение
+    annual_increase = 0.05  
     future_salary = salary * (1 + annual_increase) ** years
     return future_salary
 
@@ -191,7 +215,7 @@ def FutureSalary(salary: int, years: int):
     :param years: Количество лет.
     :rtype: Будущая зарплата.
     """
-    annual_increase = 0.05  # 5% ежегодное повышение
+    annual_increase = 0.05  
     future_salary = salary * (1 + annual_increase) ** years
     return future_salary
 
@@ -219,6 +243,24 @@ def EditData(names: list, salaries: list):
     print("2 - Редактировать зарплату")
 
     choice = int(input("Выберите, что редактировать: "))
+    
+def Vocfind(names: list, salaries: list, letter: str):
+    """
+    Функция для поиска имен, начинающихся на заданную букву, и отображения их зарплат.
+
+    :param names: Список имен.
+    :param salaries: Список зарплат.
+    :param letter: Буква для поиска.
+    :rtype: таблица
+    """
+    found_names = [name for name in names if name.lower().startswith(letter.lower())]
+    
+    if found_names:
+        for name in found_names:
+            index = names.index(name)
+            print(f"{name} - {salaries[index]}")
+    else:
+        print(f"Нет имен, начинающихся с буквы {letter}.")
     
 
 
