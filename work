@@ -1,0 +1,142 @@
+using System;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Xaml;
+
+namespace mobile1
+{
+    public partial class SliderPage : ContentPage
+    {
+        public SliderPage()
+        {
+            InitializeComponent();
+            UpdateColor(); // Инициализация начального цвета
+        }
+
+        private void OnSliderValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            UpdateColor();
+        }
+
+        private void UpdateColor()
+        {
+            // Приведение значений слайдеров к целым числам
+            int red = Convert.ToInt32(RedSlider.Value);
+            int green = Convert.ToInt32(GreenSlider.Value);
+            int blue = Convert.ToInt32(BlueSlider.Value);
+
+            // Обновление цвета фона в зависимости от значений слайдеров
+            ColorFrame.BackgroundColor = Color.FromRgb(red, green, blue);
+        }
+
+        private async void OnRandomColorButtonClicked(object sender, EventArgs e)
+        {
+            Random random = new Random();
+            int randomRed = random.Next(0, 256);
+            int randomGreen = random.Next(0, 256);
+            int randomBlue = random.Next(0, 256);
+
+            // Анимация изменения значений слайдеров на случайные
+            await AnimateSlider(RedSlider, RedSlider.Value, randomRed);
+            await AnimateSlider(GreenSlider, GreenSlider.Value, randomGreen);
+            await AnimateSlider(BlueSlider, BlueSlider.Value, randomBlue);
+        }
+
+        private Task AnimateSlider(Slider slider, double fromValue, double toValue)
+        {
+            var tcs = new TaskCompletionSource<bool>();
+
+            var animation = new Animation(v =>
+            {
+                slider.Value = v;
+            }, fromValue, toValue);
+
+            animation.Commit(slider, "SliderAnimation", length: 1000, easing: Easing.Linear, finished: (v, c) =>
+            {
+                tcs.SetResult(true);
+            });
+
+            return tcs.Task;
+        }
+
+        private void OnStepperValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            // Прозрачность обновляется при изменении значения Stepper
+            double newOpacity = e.NewValue;
+            ColorFrame.Opacity = newOpacity;
+            OpacityLabel.Text = $"Opacity: {newOpacity:F1}";
+        }
+    }
+}
+
+
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mobile1.SliderPage"
+             Title="RGB Model">
+
+    <AbsoluteLayout>
+
+        <!-- Заголовок -->
+        <Label Text="RGB Model"
+               FontSize="24"
+               HorizontalOptions="Center"
+               AbsoluteLayout.LayoutBounds="0.5, 0.1, -1, -1"
+               AbsoluteLayout.LayoutFlags="PositionProportional"
+               TextColor="Black"/>
+
+        <!-- Цветной квадрат для отображения выбранного цвета -->
+        <Frame x:Name="ColorFrame"
+               AbsoluteLayout.LayoutBounds="0.5, 0.4, 0.7, 0.3"
+               AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"
+               BackgroundColor="Black"
+               CornerRadius="20"
+               BorderColor="Black"/>
+
+        <!-- Слайдер для красного компонента -->
+        <Slider x:Name="RedSlider"
+                Minimum="0"
+                Maximum="255"
+                ValueChanged="OnSliderValueChanged"
+                AbsoluteLayout.LayoutBounds="0.5, 0.75, 0.8, -1"
+                AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"/>
+
+        <!-- Слайдер для зеленого компонента -->
+        <Slider x:Name="GreenSlider"
+                Minimum="0"
+                Maximum="255"
+                ValueChanged="OnSliderValueChanged"
+                AbsoluteLayout.LayoutBounds="0.5, 0.85, 0.8, -1"
+                AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"/>
+
+        <!-- Слайдер для синего компонента -->
+        <Slider x:Name="BlueSlider"
+                Minimum="0"
+                Maximum="255"
+                ValueChanged="OnSliderValueChanged"
+                AbsoluteLayout.LayoutBounds="0.5, 0.95, 0.8, -1"
+                AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"/>
+
+        <!-- Stepper для управления прозрачностью -->
+        <Stepper x:Name="OpacityStepper"
+                 Minimum="0"
+                 Maximum="1"
+                 Increment="0.1"
+                 Value="1.0"
+                 ValueChanged="OnStepperValueChanged"
+                 AbsoluteLayout.LayoutBounds="0.5, 1.05, 0.8, -1"
+                 AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"/>
+
+        <Label x:Name="OpacityLabel"
+               Text="Opacity: 1.0"
+               AbsoluteLayout.LayoutBounds="0.5, 1.1, -1, -1"
+               AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+        <!-- Кнопка для случайного цвета -->
+        <Button Text="Random Color"
+                Clicked="OnRandomColorButtonClicked"
+                AbsoluteLayout.LayoutBounds="0.5, 1.15, 0.6, -1"
+                AbsoluteLayout.LayoutFlags="PositionProportional, WidthProportional"/>
+
+    </AbsoluteLayout>
+</ContentPage>
